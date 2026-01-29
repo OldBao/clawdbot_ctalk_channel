@@ -42,7 +42,33 @@ export class SeaTalkBot {
   }
 
   private async handleEcho(context: MessageContext): Promise<void> {
-    // TODO: Implement echo logic
+    try {
+      if (context.imageUrl) {
+        // Echo image
+        await this.client.sendMessage({
+          email: context.sender.email,
+          message: {
+            tag: 'image',
+            image: {
+              image_url: context.imageUrl
+            }
+          }
+        });
+      } else if (context.content) {
+        // Echo text
+        await this.client.sendMessage({
+          email: context.sender.email,
+          message: {
+            tag: 'text',
+            text: {
+              content: `Echo: ${context.content}`
+            }
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Error echoing message:', error);
+    }
   }
 
   async start(port: number = 3000): Promise<void> {
