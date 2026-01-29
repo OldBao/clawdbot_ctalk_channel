@@ -79,3 +79,25 @@ export interface MessageReceivedEvent {
     }>;
   };
 }
+
+export interface BotMentioned {
+  is_mentioned: boolean;
+  bot_email: string;
+}
+
+export interface MessageContext {
+  messageId: string;
+  sender: {
+    email: string;
+    name: string;
+  };
+  chatType: 'private' | 'group';
+  groupId?: string;
+  content: string;
+  isMentioned: boolean;
+  mentionedUsers: Array<{ email: string; name: string }>;
+}
+
+export interface MessageHandlerCallback {
+  (context: MessageContext): Promise<void> | void;
+}
