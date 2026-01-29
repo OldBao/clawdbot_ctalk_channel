@@ -73,6 +73,9 @@ export interface MessageReceivedEvent {
     text?: {
       content: string;
     };
+    image?: {
+      image_url: string;
+    };
     at_users?: Array<{
       email: string;
       name: string;
@@ -94,6 +97,7 @@ export interface MessageContext {
   chatType: 'private' | 'group';
   groupId?: string;
   content: string;
+  imageUrl?: string;
   isMentioned: boolean;
   mentionedUsers: Array<{ email: string; name: string }>;
 }
