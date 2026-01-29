@@ -47,3 +47,35 @@ export interface SendMessageRequest {
 export interface SendMessageResponse {
   message_id: string;
 }
+
+export interface WebhookHeaders {
+  'x-seatalk-signature'?: string;
+  'x-seatalk-timestamp'?: string;
+  'x-seatalk-nonce'?: string;
+}
+
+export interface WebhookEvent {
+  event_type: string;
+  timestamp: number;
+  data: unknown;
+}
+
+export interface MessageReceivedEvent {
+  message_id: string;
+  sender: {
+    email: string;
+    name: string;
+  };
+  chat_type: 'private' | 'group';
+  group_id?: string;
+  message: {
+    tag: string;
+    text?: {
+      content: string;
+    };
+    at_users?: Array<{
+      email: string;
+      name: string;
+    }>;
+  };
+}
