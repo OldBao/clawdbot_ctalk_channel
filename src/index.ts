@@ -28,7 +28,9 @@ export class SeaTalkBot {
   private setupHandlers(): void {
     // Wire webhook events to message handler
     this.webhookServer.on('message.received', (data) => {
-      this.messageHandler.processMessage(data);
+      this.messageHandler.processMessage(data).catch(err => {
+        console.error('Error processing message:', err);
+      });
     });
 
     // Register echo handlers
@@ -44,10 +46,12 @@ export class SeaTalkBot {
   }
 
   async start(port: number = 3000): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       this.server = this.app.listen(port, () => {
         console.log(`SeaTalk bot listening on port ${port}`);
         resolve();
+      }).on('error', (err) => {
+        reject(err);
       });
     });
   }
