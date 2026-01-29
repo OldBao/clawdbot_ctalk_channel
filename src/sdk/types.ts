@@ -21,3 +21,29 @@ export interface ApiResponse<T> {
   message: string;
   data?: T;
 }
+
+export interface TextMessage {
+  tag: 'text';
+  text: {
+    content: string;
+  };
+}
+
+export interface ImageMessage {
+  tag: 'image';
+  image: {
+    image_url: string;
+  };
+}
+
+export type MessageContent = TextMessage | ImageMessage;
+
+export interface SendMessageRequest {
+  email?: string;
+  emails?: string[];
+  message: MessageContent;
+}
+
+export interface SendMessageResponse {
+  message_id: string;
+}
