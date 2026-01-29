@@ -28,6 +28,7 @@ export class MessageHandler {
 
   async processMessage(event: MessageReceivedEvent): Promise<void> {
     const content = event.message.text?.content || '';
+    const imageUrl = event.message.image?.image_url;
     const mentionedUsers = event.message.at_users || [];
     const isMentioned = mentionedUsers.some(
       user => user.email === this.botEmail
@@ -39,6 +40,7 @@ export class MessageHandler {
       chatType: event.chat_type,
       groupId: event.group_id,
       content,
+      imageUrl,
       isMentioned,
       mentionedUsers
     };

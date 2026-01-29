@@ -134,5 +134,34 @@ describe('MessageHandler', () => {
         })
       );
     });
+
+    it('should extract image URL from message', async () => {
+      const event: MessageReceivedEvent = {
+        message_id: 'msg_img',
+        sender: {
+          email: 'user@example.com',
+          name: 'Test User'
+        },
+        chat_type: 'private',
+        message: {
+          tag: 'image',
+          image: {
+            image_url: 'https://example.com/image.jpg'
+          }
+        }
+      };
+
+      const callback = jest.fn();
+      handler.onMessage(callback);
+
+      await handler.processMessage(event);
+
+      expect(callback).toHaveBeenCalledWith(
+        expect.objectContaining({
+          content: '',
+          imageUrl: 'https://example.com/image.jpg'
+        })
+      );
+    });
   });
 });
