@@ -40,6 +40,7 @@ describe('MessageHandler', () => {
         chatType: 'private',
         groupId: undefined,
         content: 'Hello bot',
+        imageUrl: undefined,
         isMentioned: false,
         mentionedUsers: []
       });
@@ -105,6 +106,7 @@ describe('MessageHandler', () => {
           chatType: 'group',
           groupId: 'group_123',
           content: '@bot help me',
+          imageUrl: undefined,
           isMentioned: true
         })
       );
@@ -130,7 +132,8 @@ describe('MessageHandler', () => {
 
       expect(callback).toHaveBeenCalledWith(
         expect.objectContaining({
-          content: ''
+          content: '',
+          imageUrl: undefined
         })
       );
     });
