@@ -11,11 +11,27 @@ export class WebhookVerifier {
 
   verifySignature(
     signature: string,
-    timestamp: string,
-    nonce: string,
-    body: string
+    body: string,
+    timestamp?: string,
+    nonce?: string
   ): boolean {
-    // Check timestamp freshness
+    // Seatalk Open Platform: sha256(body + signing_secret), hex lowercase.
+    if (!timestamp || !nonce) {
+      const expectedSignature = crypto
+        .createHash('sha256')
+        .update(`${body}${this.signingSecret}`)
+        .digest('hex');
+
+      if (signature.length !== expectedSignature.length) {
+        return false;
+      }
+      return crypto.timingSafeEqual(
+        Buffer.from(signature),
+        Buffer.from(expectedSignature)
+      );
+    }
+
+    // Legacy scheme: HMAC with timestamp/nonce
     const now = Math.floor(Date.now() / 1000);
     const requestTime = parseInt(timestamp, 10);
 
@@ -23,7 +39,6 @@ export class WebhookVerifier {
       return false;
     }
 
-    // Compute expected signature
     const signString = `${timestamp}\n${nonce}\n${body}`;
     const expectedSignature = crypto
       .createHmac('sha256', this.signingSecret)

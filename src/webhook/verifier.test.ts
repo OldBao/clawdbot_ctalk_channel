@@ -20,9 +20,9 @@ describe('WebhookVerifier', () => {
 
       const result = verifier.verifySignature(
         signature,
+        body,
         timestamp,
-        nonce,
-        body
+        nonce
       );
 
       expect(result).toBe(true);
@@ -36,9 +36,9 @@ describe('WebhookVerifier', () => {
 
       const result = verifier.verifySignature(
         invalidSignature,
+        body,
         timestamp,
-        nonce,
-        body
+        nonce
       );
 
       expect(result).toBe(false);
@@ -57,9 +57,9 @@ describe('WebhookVerifier', () => {
 
       const result = verifier.verifySignature(
         signature,
+        body,
         oldTimestamp,
-        nonce,
-        body
+        nonce
       );
 
       expect(result).toBe(false);
@@ -78,9 +78,9 @@ describe('WebhookVerifier', () => {
 
       const result = verifier.verifySignature(
         signature,
+        body,
         recentTimestamp,
-        nonce,
-        body
+        nonce
       );
 
       expect(result).toBe(true);

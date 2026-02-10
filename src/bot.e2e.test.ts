@@ -156,7 +156,7 @@ describe('SeaTalkBot E2E', () => {
         .send(event);
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toContain('Missing required headers');
+      expect(response.body.error).toContain('Missing required header: signature');
       expect(mockClient.sendMessage).not.toHaveBeenCalled();
     });
   });

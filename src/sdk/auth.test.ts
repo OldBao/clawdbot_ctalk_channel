@@ -19,13 +19,9 @@ describe('SeaTalkAuth', () => {
     it('should fetch and return access token', async () => {
       const mockResponse = {
         data: {
+          app_access_token: 'mock_token_12345',
           code: 0,
-          message: 'success',
-          data: {
-            access_token: 'mock_token_12345',
-            token_type: 'Bearer',
-            expires_in: 7200
-          }
+          expire: Math.floor(Date.now() / 1000) + 7200
         }
       };
 
@@ -36,7 +32,7 @@ describe('SeaTalkAuth', () => {
 
       expect(token).toBe('mock_token_12345');
       expect(mockedAxios.post).toHaveBeenCalledWith(
-        'https://openapi.seatalk.io/v1/auth/token',
+        'https://openapi.seatalk.io/auth/app_access_token',
         {
           app_id: 'test_app_id',
           app_secret: 'test_app_secret'
@@ -47,13 +43,9 @@ describe('SeaTalkAuth', () => {
     it('should cache access token until expiration', async () => {
       const mockResponse = {
         data: {
+          app_access_token: 'cached_token',
           code: 0,
-          message: 'success',
-          data: {
-            access_token: 'cached_token',
-            token_type: 'Bearer',
-            expires_in: 7200
-          }
+          expire: Math.floor(Date.now() / 1000) + 7200
         }
       };
 

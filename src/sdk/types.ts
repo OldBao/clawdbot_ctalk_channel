@@ -3,12 +3,22 @@ export interface SeaTalkConfig {
   appSecret: string;
   signingSecret: string;
   baseUrl?: string;
+  apiEndpointOverrides?: Record<
+    string,
+    Partial<{
+      method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+      path: string;
+      auth: boolean;
+    }>
+  >;
 }
 
 export interface AccessTokenResponse {
-  access_token: string;
-  token_type: string;
-  expires_in: number;
+  access_token?: string;
+  app_access_token?: string;
+  token_type?: string;
+  expires_in?: number;
+  expire?: number;
 }
 
 export interface SeaTalkError {

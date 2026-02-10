@@ -68,7 +68,7 @@ describe('WebhookServer', () => {
         .send({ event_type: 'test' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toContain('Missing required headers');
+      expect(response.body.error).toContain('Missing required header: signature');
     });
 
     it('should emit event for valid webhook', async () => {
@@ -94,6 +94,49 @@ describe('WebhookServer', () => {
       expect(eventHandler).toHaveBeenCalledWith({
         message_id: 'msg_123'
       });
+    });
+
+    it('should normalize message_from_bot_subscriber using employee_code as sender email', async () => {
+      const timestamp = String(Math.floor(Date.now() / 1000));
+      const nonce = 'test_nonce';
+      const body = {
+        event_type: 'message_from_bot_subscriber',
+        event: {
+          employee_code: '74723',
+          email: 'andy.zhanggx@shopee.com',
+          message: {
+            message_id: 'msg_abc',
+            tag: 'text',
+            text: { content: 'hi' }
+          }
+        }
+      };
+      const bodyStr = JSON.stringify(body);
+      const signature = createSignature(timestamp, nonce, bodyStr);
+
+      const eventHandler = jest.fn();
+      server.on('message.received', eventHandler);
+
+      const response = await request(app)
+        .post('/webhook')
+        .set('x-seatalk-signature', signature)
+        .set('x-seatalk-timestamp', timestamp)
+        .set('x-seatalk-nonce', nonce)
+        .send(body);
+
+      expect(response.status).toBe(200);
+      expect(eventHandler).toHaveBeenCalledWith(
+        expect.objectContaining({
+          message_id: 'msg_abc',
+          sender: expect.objectContaining({
+            email: '74723'
+          }),
+          message: expect.objectContaining({
+            tag: 'text',
+            text: { content: 'hi' }
+          })
+        })
+      );
     });
   });
 });
