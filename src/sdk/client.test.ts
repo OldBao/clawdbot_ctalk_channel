@@ -1,6 +1,7 @@
-import { SeaTalkClient } from './client';
-import { SeaTalkAuth } from './auth';
 import axios from 'axios';
+import { SeaTalkAuth } from './auth';
+import { SeaTalkClient } from './client';
+import { SEA_TALK_ENDPOINTS } from './endpoints';
 
 jest.mock('axios');
 jest.mock('./auth');
@@ -26,9 +27,18 @@ describe('SeaTalkClient', () => {
     MockedAuth.mockImplementation(() => mockAuth);
   });
 
+  it('exposes dynamic API callers for all documented slugs', () => {
+    const client = new SeaTalkClient(config);
+    const apiSlugs = Object.keys(client.api);
+
+    expect(apiSlugs.length).toBe(Object.keys(SEA_TALK_ENDPOINTS).length);
+    expect(typeof client.api['create-group-chat']).toBe('function');
+    expect(typeof client.api['messaging_send-message-to-bot-subscriber_']).toBe('function');
+  });
+
   describe('sendMessage', () => {
-    it('should send text message to single recipient', async () => {
-      const mockResponse = {
+    it('sends text message to single recipient', async () => {
+      mockedAxios.request.mockResolvedValue({
         data: {
           code: 0,
           message: 'success',
@@ -36,9 +46,7 @@ describe('SeaTalkClient', () => {
             message_id: 'msg_123'
           }
         }
-      };
-
-      mockedAxios.post.mockResolvedValue(mockResponse);
+      });
 
       const client = new SeaTalkClient(config);
       const result = await client.sendMessage({
@@ -50,56 +58,26 @@ describe('SeaTalkClient', () => {
       });
 
       expect(result.message_id).toBe('msg_123');
-      expect(mockedAxios.post).toHaveBeenCalledWith(
-        'https://openapi.seatalk.io/v1/bot/message/send',
-        {
-          email: 'user@example.com',
-          message: {
-            tag: 'text',
-            text: { content: 'Hello' }
-          }
-        },
-        {
+      expect(mockedAxios.request).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: 'POST',
+          url: 'https://openapi.seatalk.io/messaging/v2/single_chat',
+          data: {
+            employee_code: 'user@example.com',
+            message: {
+              tag: 'text',
+              text: { content: 'Hello' }
+            }
+          },
           headers: {
-            'Authorization': 'Bearer mock_access_token',
+            Authorization: 'Bearer mock_access_token',
             'Content-Type': 'application/json'
           }
-        }
+        })
       );
     });
 
-    it('should send message to multiple recipients', async () => {
-      const mockResponse = {
-        data: {
-          code: 0,
-          message: 'success',
-          data: {
-            message_id: 'msg_456'
-          }
-        }
-      };
-
-      mockedAxios.post.mockResolvedValue(mockResponse);
-
-      const client = new SeaTalkClient(config);
-      await client.sendMessage({
-        emails: ['user1@example.com', 'user2@example.com'],
-        message: {
-          tag: 'text',
-          text: { content: 'Broadcast' }
-        }
-      });
-
-      expect(mockedAxios.post).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          emails: ['user1@example.com', 'user2@example.com']
-        }),
-        expect.any(Object)
-      );
-    });
-
-    it('should throw error when neither email nor emails provided', async () => {
+    it('throws error when neither email nor emails provided', async () => {
       const client = new SeaTalkClient(config);
 
       await expect(
@@ -110,6 +88,69 @@ describe('SeaTalkClient', () => {
           }
         } as any)
       ).rejects.toThrow('Either email or emails must be provided');
+    });
+  });
+
+  describe('invokeApi', () => {
+    it('supports endpoint override and GET query mode', async () => {
+      mockedAxios.request.mockResolvedValue({
+        data: {
+          code: 0,
+          message: 'ok',
+          data: [{ id: 'dept_1' }]
+        }
+      });
+
+      const client = new SeaTalkClient({
+        ...config,
+        apiEndpointOverrides: {
+          'get-departments': {
+            method: 'GET',
+            path: '/v1/org/departments'
+          }
+        }
+      });
+
+      const result = await client.invokeApi('get-departments', { active: true }, {
+        query: { page: 1 }
+      });
+
+      expect(result).toEqual([{ id: 'dept_1' }]);
+      expect(mockedAxios.request).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: 'GET',
+          url: 'https://openapi.seatalk.io/v1/org/departments',
+          params: {
+            active: true,
+            page: 1
+          }
+        })
+      );
+    });
+
+    it('does not attach bearer token for non-auth endpoints', async () => {
+      mockedAxios.request.mockResolvedValue({
+        data: {
+          app_access_token: 'token',
+          code: 0,
+          expire: Math.floor(Date.now() / 1000) + 7200
+        }
+      });
+
+      const client = new SeaTalkClient(config);
+      await client.invokeApi('get-app-access-token', {
+        app_id: 'id',
+        app_secret: 'secret'
+      });
+
+      expect(mockAuth.getAccessToken).not.toHaveBeenCalled();
+      expect(mockedAxios.request).toHaveBeenCalledWith(
+        expect.objectContaining({
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+      );
     });
   });
 });

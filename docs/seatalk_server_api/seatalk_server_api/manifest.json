@@ -1,0 +1,301 @@
+{
+  "generatedAt": "2026-02-04T09:29:39.692Z",
+  "count": 59,
+  "manifest": [
+    {
+      "slug": "api-development-guide",
+      "url": "https://open.seatalk.io/docs/api-development-guide/",
+      "file": "api-development-guide.md"
+    },
+    {
+      "slug": "overview-server-apis",
+      "url": "https://open.seatalk.io/docs/overview-server-apis/",
+      "file": "overview-server-apis.md"
+    },
+    {
+      "slug": "OpenAPI-Pagination-standard",
+      "url": "https://open.seatalk.io/docs/OpenAPI-Pagination-standard/",
+      "file": "OpenAPI-Pagination-standard.md"
+    },
+    {
+      "slug": "SeaTalk-Model-Context-Protocol-Server",
+      "url": "https://open.seatalk.io/docs/SeaTalk-Model-Context-Protocol-Server/",
+      "file": "SeaTalk-Model-Context-Protocol-Server.md"
+    },
+    {
+      "slug": "server-apis-event-callback",
+      "url": "https://open.seatalk.io/docs/server-apis-event-callback/",
+      "file": "server-apis-event-callback.md"
+    },
+    {
+      "slug": "list-of-events",
+      "url": "https://open.seatalk.io/docs/list-of-events/",
+      "file": "list-of-events.md"
+    },
+    {
+      "slug": "get-app-access-token",
+      "url": "https://open.seatalk.io/docs/get-app-access-token/",
+      "file": "get-app-access-token.md"
+    },
+    {
+      "slug": "verify-sso-token",
+      "url": "https://open.seatalk.io/docs/verify-sso-token/",
+      "file": "verify-sso-token.md"
+    },
+    {
+      "slug": "code-to-employee",
+      "url": "https://open.seatalk.io/docs/code-to-employee/",
+      "file": "code-to-employee.md"
+    },
+    {
+      "slug": "Get-Bot-Subscriber-List",
+      "url": "https://open.seatalk.io/docs/Get-Bot-Subscriber-List/",
+      "file": "Get-Bot-Subscriber-List.md"
+    },
+    {
+      "slug": "get-employee-profile",
+      "url": "https://open.seatalk.io/docs/get-employee-profile/",
+      "file": "get-employee-profile.md"
+    },
+    {
+      "slug": "get-employee-code-with-email",
+      "url": "https://open.seatalk.io/docs/get-employee-code-with-email/",
+      "file": "get-employee-code-with-email.md"
+    },
+    {
+      "slug": "get-user-lang-pref",
+      "url": "https://open.seatalk.io/docs/get-user-lang-pref/",
+      "file": "get-user-lang-pref.md"
+    },
+    {
+      "slug": "onboard-employee",
+      "url": "https://open.seatalk.io/docs/onboard-employee/",
+      "file": "onboard-employee.md"
+    },
+    {
+      "slug": "reboard-employee",
+      "url": "https://open.seatalk.io/docs/reboard-employee/",
+      "file": "reboard-employee.md"
+    },
+    {
+      "slug": "Delete-Employee",
+      "url": "https://open.seatalk.io/docs/Delete-Employee/",
+      "file": "Delete-Employee.md"
+    },
+    {
+      "slug": "update-employee",
+      "url": "https://open.seatalk.io/docs/update-employee/",
+      "file": "update-employee.md"
+    },
+    {
+      "slug": "update-employee-avatar",
+      "url": "https://open.seatalk.io/docs/update-employee-avatar/",
+      "file": "update-employee-avatar.md"
+    },
+    {
+      "slug": "check-employee-existenece",
+      "url": "https://open.seatalk.io/docs/check-employee-existenece/",
+      "file": "check-employee-existenece.md"
+    },
+    {
+      "slug": "create-department",
+      "url": "https://open.seatalk.io/docs/create-department/",
+      "file": "create-department.md"
+    },
+    {
+      "slug": "get-departments",
+      "url": "https://open.seatalk.io/docs/get-departments/",
+      "file": "get-departments.md"
+    },
+    {
+      "slug": "get-department-employees",
+      "url": "https://open.seatalk.io/docs/get-department-employees/",
+      "file": "get-department-employees.md"
+    },
+    {
+      "slug": "update-department",
+      "url": "https://open.seatalk.io/docs/update-department/",
+      "file": "update-department.md"
+    },
+    {
+      "slug": "delete-department",
+      "url": "https://open.seatalk.io/docs/delete-department/",
+      "file": "delete-department.md"
+    },
+    {
+      "slug": "Get-Thread-by-Thread-ID-in-Private-Chat",
+      "url": "https://open.seatalk.io/docs/Get-Thread-by-Thread-ID-in-Private-Chat/",
+      "file": "Get-Thread-by-Thread-ID-in-Private-Chat.md"
+    },
+    {
+      "slug": "new_message_received_from_thread",
+      "url": "https://open.seatalk.io/docs/new_message_received_from_thread/",
+      "file": "new_message_received_from_thread.md"
+    },
+    {
+      "slug": "user_enter_chatroom_with_bot",
+      "url": "https://open.seatalk.io/docs/user_enter_chatroom_with_bot/",
+      "file": "user_enter_chatroom_with_bot.md"
+    },
+    {
+      "slug": "Set-Typing-Status-in-Group-Chat",
+      "url": "https://open.seatalk.io/docs/Set-Typing-Status-in-Group-Chat/",
+      "file": "Set-Typing-Status-in-Group-Chat.md"
+    },
+    {
+      "slug": "Set-Typing-Status-in-Private-Chat",
+      "url": "https://open.seatalk.io/docs/Set-Typing-Status-in-Private-Chat/",
+      "file": "Set-Typing-Status-in-Private-Chat.md"
+    },
+    {
+      "slug": "Get-Message-by-Message-ID",
+      "url": "https://open.seatalk.io/docs/Get-Message-by-Message-ID/",
+      "file": "Get-Message-by-Message-ID.md"
+    },
+    {
+      "slug": "event_new_bot_subscriber",
+      "url": "https://open.seatalk.io/docs/event_new_bot_subscriber/",
+      "file": "event_new_bot_subscriber.md"
+    },
+    {
+      "slug": "messaging_send-message-to-bot-user_",
+      "url": "https://open.seatalk.io/docs/messaging_send-message-to-bot-user_/",
+      "file": "messaging_send-message-to-bot-user_.md"
+    },
+    {
+      "slug": "event_message_received_from_bot_subscriber",
+      "url": "https://open.seatalk.io/docs/event_message_received_from_bot_subscriber/",
+      "file": "event_message_received_from_bot_subscriber.md"
+    },
+    {
+      "slug": "Send-Message-to-Group-Chat",
+      "url": "https://open.seatalk.io/docs/Send-Message-to-Group-Chat/",
+      "file": "Send-Message-to-Group-Chat.md"
+    },
+    {
+      "slug": "event_new_mentioned_message_from_group_chat",
+      "url": "https://open.seatalk.io/docs/event_new_mentioned_message_from_group_chat/",
+      "file": "event_new_mentioned_message_from_group_chat.md"
+    },
+    {
+      "slug": "Update-Interactive-Message-Card",
+      "url": "https://open.seatalk.io/docs/Update-Interactive-Message-Card/",
+      "file": "Update-Interactive-Message-Card.md"
+    },
+    {
+      "slug": "event_interactive_message_click",
+      "url": "https://open.seatalk.io/docs/event_interactive_message_click/",
+      "file": "event_interactive_message_click.md"
+    },
+    {
+      "slug": "overview-of-approval-center",
+      "url": "https://open.seatalk.io/docs/overview-of-approval-center/",
+      "file": "overview-of-approval-center.md"
+    },
+    {
+      "slug": "approval-center-definition-explanations",
+      "url": "https://open.seatalk.io/docs/approval-center-definition-explanations/",
+      "file": "approval-center-definition-explanations.md"
+    },
+    {
+      "slug": "create-approval-item",
+      "url": "https://open.seatalk.io/docs/create-approval-item/",
+      "file": "create-approval-item.md"
+    },
+    {
+      "slug": "get-approval-item",
+      "url": "https://open.seatalk.io/docs/get-approval-item/",
+      "file": "get-approval-item.md"
+    },
+    {
+      "slug": "update-approval-item",
+      "url": "https://open.seatalk.io/docs/update-approval-item/",
+      "file": "update-approval-item.md"
+    },
+    {
+      "slug": "delete-approval-item",
+      "url": "https://open.seatalk.io/docs/delete-approval-item/",
+      "file": "delete-approval-item.md"
+    },
+    {
+      "slug": "approval-center-callback-signature-verification",
+      "url": "https://open.seatalk.io/docs/approval-center-callback-signature-verification/",
+      "file": "approval-center-callback-signature-verification.md"
+    },
+    {
+      "slug": "Add-Group-Members",
+      "url": "https://open.seatalk.io/docs/Add-Group-Members/",
+      "file": "Add-Group-Members.md"
+    },
+    {
+      "slug": "Remove-Group-Members",
+      "url": "https://open.seatalk.io/docs/Remove-Group-Members/",
+      "file": "Remove-Group-Members.md"
+    },
+    {
+      "slug": "create-group-chat",
+      "url": "https://open.seatalk.io/docs/create-group-chat/",
+      "file": "create-group-chat.md"
+    },
+    {
+      "slug": "Get-Thread-by-Thread-ID",
+      "url": "https://open.seatalk.io/docs/Get-Thread-by-Thread-ID/",
+      "file": "Get-Thread-by-Thread-ID.md"
+    },
+    {
+      "slug": "event-bot-added-to-group-chat",
+      "url": "https://open.seatalk.io/docs/event-bot-added-to-group-chat/",
+      "file": "event-bot-added-to-group-chat.md"
+    },
+    {
+      "slug": "Get-Joined-Group-Chat-List",
+      "url": "https://open.seatalk.io/docs/Get-Joined-Group-Chat-List/",
+      "file": "Get-Joined-Group-Chat-List.md"
+    },
+    {
+      "slug": "get-group-info",
+      "url": "https://open.seatalk.io/docs/get-group-info/",
+      "file": "get-group-info.md"
+    },
+    {
+      "slug": "Event-Bot-Removed-From-Group-Chat",
+      "url": "https://open.seatalk.io/docs/Event-Bot-Removed-From-Group-Chat/",
+      "file": "Event-Bot-Removed-From-Group-Chat.md"
+    },
+    {
+      "slug": "get-chat-history",
+      "url": "https://open.seatalk.io/docs/get-chat-history/",
+      "file": "get-chat-history.md"
+    },
+    {
+      "slug": "messaging_send-service-notice_i18n",
+      "url": "https://open.seatalk.io/docs/messaging_send-service-notice_i18n/",
+      "file": "messaging_send-service-notice_i18n.md"
+    },
+    {
+      "slug": "messaging_send-service-notice",
+      "url": "https://open.seatalk.io/docs/messaging_send-service-notice/",
+      "file": "messaging_send-service-notice.md"
+    },
+    {
+      "slug": "messaging_send-notification-badge",
+      "url": "https://open.seatalk.io/docs/messaging_send-notification-badge/",
+      "file": "messaging_send-notification-badge.md"
+    },
+    {
+      "slug": "admin-audit-logs",
+      "url": "https://open.seatalk.io/docs/admin-audit-logs/",
+      "file": "admin-audit-logs.md"
+    },
+    {
+      "slug": "build-an-app-for-your-team",
+      "url": "https://open.seatalk.io/docs/build-an-app-for-your-team/",
+      "file": "build-an-app-for-your-team.md"
+    },
+    {
+      "slug": "messaging_send-message-to-bot-subscriber_",
+      "url": "https://open.seatalk.io/docs/messaging_send-message-to-bot-subscriber_/",
+      "file": "messaging_send-message-to-bot-subscriber_.md"
+    }
+  ]
+}

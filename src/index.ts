@@ -14,13 +14,25 @@ export class SeaTalkBot {
   private app: express.Application;
   private server?: Server;
 
-  constructor(config: SeaTalkConfig, botEmail: string) {
+  constructor(config: SeaTalkConfig, botEmail: string, webhookPath: string = '/webhook') {
     this.config = config;
     this.botEmail = botEmail;
     this.client = new SeaTalkClient(config);
-    this.webhookServer = new WebhookServer(config);
+    this.webhookServer = new WebhookServer(config, webhookPath);
     this.messageHandler = new MessageHandler(botEmail);
     this.app = express();
+
+    // Basic access log to stdout for easy tailing in seatalk.log
+    this.app.use((req, res, next) => {
+      const start = Date.now();
+      res.on('finish', () => {
+        const durationMs = Date.now() - start;
+        console.log(
+          `ACCESS ${req.method} ${req.originalUrl} ${res.statusCode} ${durationMs}ms`
+        );
+      });
+      next();
+    });
 
     this.setupHandlers();
   }

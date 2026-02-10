@@ -21,23 +21,34 @@ export class SeaTalkAuth {
     }
 
     try {
-      const response = await axios.post<ApiResponse<AccessTokenResponse>>(
-        `${this.baseUrl}/v1/auth/token`,
+      const response = await axios.post<ApiResponse<AccessTokenResponse> | AccessTokenResponse>(
+        `${this.baseUrl}/auth/app_access_token`,
         {
           app_id: this.config.appId,
           app_secret: this.config.appSecret
         }
       );
 
-      const { data } = response.data;
-      if (!data) {
+      const payload = response.data as any;
+      const data = payload?.data ? payload.data : payload;
+
+      const token = data?.app_access_token || data?.access_token;
+      if (!token) {
         throw new Error('No token data received');
       }
 
-      this.cachedToken = data.access_token;
-      this.tokenExpiry = now + (data.expires_in * 1000);
+      this.cachedToken = token;
 
-      return this.cachedToken;
+      if (typeof data?.expire === 'number') {
+        this.tokenExpiry = data.expire * 1000;
+      } else if (typeof data?.expires_in === 'number') {
+        this.tokenExpiry = now + (data.expires_in * 1000);
+      } else {
+        // Fallback cache TTL if API omits expiry fields.
+        this.tokenExpiry = now + 3600 * 1000;
+      }
+
+      return token;
     } catch (error) {
       this.cachedToken = null;
       this.tokenExpiry = 0;
